@@ -63,11 +63,11 @@ public class StoreTest {
 
         for (int i = 0; i < 2; i++) {                                                                                   //generator of multiple random accounts, currently set on 2
 
-            int gender = random.nextInt(2);                                                                       //random integer from 0 to 1 to set random gender
+            int gender = random.nextInt(2);                                                                             //random integer from 0 to 1 to set random gender
             int randomAddress = random.nextInt(addressStreet.length);                                                   // \
             int randomCities = random.nextInt(cities.length);                                                           //  random integers corresponding to the street, city and domain in the tables above
             int randomDomain = random.nextInt(domain.length);                                                           // /
-            int randomPostCode = random.nextInt(2);                                                              //random integer from 0 to 1 for purpose of generation random UK post code
+            int randomPostCode = random.nextInt(2);                                                                     //random integer from 0 to 1 for purpose of generation random UK post code
             int randomMaleName = random.nextInt(maleName.length);                                                       // \
             int randomMaleSurname = random.nextInt(maleSurname.length);                                                 //  random integer corresponding to the male name and in the table above
             int randomFemaleName = random.nextInt(femaleName.length);                                                   // \
@@ -76,17 +76,17 @@ public class StoreTest {
             String numericAddress = RandomStringUtils.randomNumeric(1, 3);                                              //random street number, set from 1 to 3 digits
             String numericMail = RandomStringUtils.randomNumeric(2, 6);                                                 //random number from 2 to 6 digits to be used in email address
             String address = addressStreet[randomAddress] + " Street " + numericAddress;                                //generator of full street address including street name and random number
-            String maleEmailAddress = StringUtils.stripAccents(maleName[randomMaleName] + "." +                   // \
+            String maleEmailAddress = StringUtils.stripAccents(maleName[randomMaleName] + "." +                         // \
                     maleSurname[randomMaleSurname] + numericMail + "@" + domain[randomDomain]);                         //  final email address using male name, surname, random number and domain
-            String femaleEmailAddress = StringUtils.stripAccents(femaleName[randomFemaleName] + "." +             // \
+            String femaleEmailAddress = StringUtils.stripAccents(femaleName[randomFemaleName] + "." +                   // \
                     femaleSurname[randomFemaleSurname] + numericMail + "@" + domain[randomDomain]);                     //  similar as above for female
 
             String[] postCode1 = {RandomStringUtils.randomAlphabetic(1, 2).toUpperCase() +                              // \
-                    RandomStringUtils.randomNumeric(1) + RandomStringUtils.randomAlphabetic(1)             //  table with 2 random generators that covers first part of UK post codes in one of formats: "AA9A", "A9A", "A9", "A99", "AA9" or "AA99", where A signifies a letter and 9 a digit
+                    RandomStringUtils.randomNumeric(1) + RandomStringUtils.randomAlphabetic(1)                          //  table with 2 random generators that covers first part of UK post codes in one of formats: "AA9A", "A9A", "A9", "A99", "AA9" or "AA99", where A signifies a letter and 9 a digit
                     .toUpperCase(), RandomStringUtils.randomAlphabetic(1, 2).toUpperCase() +                            //  /
                     RandomStringUtils.randomNumeric(1, 2)};                                                             // /
-            String postCode = postCode1[randomPostCode] + " " + RandomStringUtils.randomNumeric(1) +              // \
-                    RandomStringUtils.randomAlphabetic(2).toUpperCase();                                          //  generator of final post code, combined with before generated first part and now generated second part; final format of post code is one of: "AA9A 9AA", "A9A 9AA", "A9 9AA", "A99 9AA", "AA9 9AA" or "AA99 9AA", where A signifies a letter and 9 a digit
+            String postCode = postCode1[randomPostCode] + " " + RandomStringUtils.randomNumeric(1) +                    // \
+                    RandomStringUtils.randomAlphabetic(2).toUpperCase();                                                //  generator of final post code, combined with before generated first part and now generated second part; final format of post code is one of: "AA9A 9AA", "A9A 9AA", "A9 9AA", "A99 9AA", "AA9 9AA" or "AA99 9AA", where A signifies a letter and 9 a digit
 
             driver.findElement(By.cssSelector(".no-account > a")).click();                                              //go to 'create an account'
             driver.findElements(By.name("id_gender")).get(gender).click();                                              //choosing gender accurate to previously generated number - 0 for male and 1 for female
@@ -104,7 +104,7 @@ public class StoreTest {
                 email.sendKeys(femaleEmailAddress.toLowerCase());                                                       // /
             }
 
-            driver.findElement(By.name("password")).sendKeys("Pass1234");                                 //input password
+            driver.findElement(By.name("password")).sendKeys("Pass1234");                                               //input password
             driver.findElement(By.cssSelector(".btn.btn-primary.form-control-submit.float-xs-right")).click();          //submit form
             driver.findElement(By.cssSelector(".account")).click();                                                     //account settings
             driver.findElement(By.id("address-link")).click();                                                          //add new address
